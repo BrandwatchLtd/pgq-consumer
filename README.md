@@ -26,4 +26,4 @@ Once you have those, create a ```PGQConsumer```:
     PGQEventHandler eventHandler = new MyEventHandler();  // Your callback for each event
     PGQConsumer pgqConsumer = new PGQConsumer(queueName, consumerName, dataSource, eventHandler);
 
-The ```PGQConsumer``` is a ```Runnable```, so put it into a pool for continuous execution, and away you go.
+The ```PGQConsumer``` is a ```Runnable```, so put it into a pool for continuous execution, and away you go. If you're looking for an example ```PGQEventHandler``` then check out ```PrintingEventHandler```.
