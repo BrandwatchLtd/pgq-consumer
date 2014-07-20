@@ -20,10 +20,10 @@ As mentioned before, this code originated from a Spring application, so it assum
 
 Once you have those, create a ```PGQConsumer```:
   
-  String queueName = "myQueue";                         // What you called your queue in pgq.create_queue()
-  String consumerName = "myConsumer";                   // A name unique to this application
-  DataSource dataSource = ...                           // Initialised and pointing at your database
-  PGQEventHandler eventHandler = new MyEventHandler();  // Your callback for each event
-  PGQConsumer pgqConsumer = new PGQConsumer(queueName, consumerName, dataSource, eventHandler);
+    String queueName = "myQueue";                         // What you called your queue in pgq.create_queue()
+    String consumerName = "myConsumer";                   // A name unique to this application
+    DataSource dataSource = ...                           // Initialised and pointing at your database
+    PGQEventHandler eventHandler = new MyEventHandler();  // Your callback for each event
+    PGQConsumer pgqConsumer = new PGQConsumer(queueName, consumerName, dataSource, eventHandler);
 
 The ```PGQConsumer``` is a ```Runnable```, so put it into a pool for continuous execution, and away you go.
