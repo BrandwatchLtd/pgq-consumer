@@ -26,22 +26,13 @@ public class PGQConsumer implements Runnable {
 
     private final String queueName;
     private final String consumerName;
+    private final JdbcTemplate jdbcTemplate;
+    private final PGQEventHandler eventHandler;
 
-    private JdbcTemplate jdbcTemplate;
-    private PGQEventHandler eventHandler;
-
-    public PGQConsumer(String queueName, String consumerName) {
+    public PGQConsumer(String queueName, String consumerName, DataSource dataSource, PGQEventHandler eventHandler) {
         this.queueName = queueName;
         this.consumerName = consumerName;
-    }
-
-    @Required
-    public void setDataSource(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
-    }
-    
-    @Required
-    public void setPgqEventHandler(PGQEventHandler eventHandler) {
         this.eventHandler = eventHandler;
     }
 
