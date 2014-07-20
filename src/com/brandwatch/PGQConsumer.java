@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
- * Consumes events from the Signals PGQ event queue. Follows the recipe on the following URL:
+ * Consumes events from the PGQ event queue. Follows the recipe on the following URL:
  * http://wiki.postgresql.org/wiki/PGQ_Tutorial#Writing_a_PGQ_consumer
  *
  * @author jamess
