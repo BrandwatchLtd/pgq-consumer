@@ -1,4 +1,4 @@
-package com.brandwatch;
+package com.brandwatch.pgqconsumer;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
- * Consumes events from the Signals PGQ event queue. Follows the recipe on the following URL:
+ * Consumes events from the PGQ event queue. Follows the recipe on the following URL:
  * http://wiki.postgresql.org/wiki/PGQ_Tutorial#Writing_a_PGQ_consumer
  *
  * @author jamess
@@ -26,20 +26,14 @@ public class PGQConsumer implements Runnable {
 
     private final String queueName;
     private final String consumerName;
+    private final JdbcTemplate jdbcTemplate;
+    private final PGQEventHandler eventHandler;
 
-    private JdbcTemplate jdbcTemplate;
-
-    @Autowired
-    private PGQEventHandler eventHandler;
-
-    public PGQConsumer(String queueName, String consumerName) {
+    public PGQConsumer(String queueName, String consumerName, DataSource dataSource, PGQEventHandler eventHandler) {
         this.queueName = queueName;
         this.consumerName = consumerName;
-    }
-
-    @Required
-    public void setDataSource(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
+        this.eventHandler = eventHandler;
     }
 
     /**

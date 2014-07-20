@@ -1,4 +1,4 @@
-package com.brandwatch;
+package com.brandwatch.pgqconsumer;
 
 import java.util.Date;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 import com.google.common.collect.ImmutableMap;
 
 /**
- * Domain object for a Signals PGQ event. This mirrors the PGQ table(s) in the database.
+ * Domain object for a PGQ event. This mirrors the PGQ table(s) in the database.
  */
 public class PGQEvent {
     private long id;

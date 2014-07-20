@@ -1,4 +1,4 @@
-package com.brandwatch;
+package com.brandwatch.pgqconsumer;
 
 /**
  * Interface for any PGQ event handlers.

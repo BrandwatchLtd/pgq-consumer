@@ -1,4 +1,4 @@
-package com.brandwatch;
+package com.brandwatch.pgqconsumer;
 
 
 import static com.google.common.collect.Maps.newHashMap;
@@ -16,7 +16,7 @@ import org.springframework.jdbc.core.RowMapper;
 import com.google.common.base.Splitter;
 
 /**
- * RowMapper implementation for creating Signals PGQ Event objects.
+ * RowMapper implementation for creating PGQ Event objects.
  */
 public class PGQEventRowMapper implements RowMapper<PGQEvent> {
     private final Splitter ampSplitter = Splitter.on('&');
