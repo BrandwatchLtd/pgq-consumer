@@ -1,4 +1,4 @@
-package com.brandwatch;
+package com.brandwatch.pgqconsumer;
 
 
 import static com.google.common.collect.Maps.newHashMap;

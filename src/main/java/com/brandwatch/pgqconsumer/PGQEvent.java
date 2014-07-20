@@ -1,4 +1,4 @@
-package com.brandwatch;
+package com.brandwatch.pgqconsumer;
 
 import java.util.Date;
 import java.util.Map;
