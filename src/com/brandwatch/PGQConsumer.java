@@ -41,6 +41,10 @@ public class PGQConsumer implements Runnable {
     public void setDataSource(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
+    
+    public void setPgqEventHandler(PGQEventHandler eventHandler) {
+        this.eventHandler = eventHandler;
+    }
 
     /**
      * Polls PGQ for events and processes them when found.
