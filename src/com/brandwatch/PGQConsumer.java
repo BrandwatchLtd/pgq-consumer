@@ -28,8 +28,6 @@ public class PGQConsumer implements Runnable {
     private final String consumerName;
 
     private JdbcTemplate jdbcTemplate;
-
-    @Autowired
     private PGQEventHandler eventHandler;
 
     public PGQConsumer(String queueName, String consumerName) {
@@ -42,6 +40,7 @@ public class PGQConsumer implements Runnable {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
     
+    @Required
     public void setPgqEventHandler(PGQEventHandler eventHandler) {
         this.eventHandler = eventHandler;
     }
