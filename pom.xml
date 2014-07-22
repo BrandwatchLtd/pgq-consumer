@@ -7,6 +7,16 @@
   <name>PGQ Consumer</name>
   <description>Consumes events from PGQ.</description>
 
+  <scm>
+    <connection>scm:git:git@github.com:BrandwatchLtd/pgq-consumer.git</connection>
+    <developerConnection>scm:git:git@github.com:BrandwatchLtd/pgq-consumer.git</developerConnection>
+  </scm>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>com.google.guava</groupId>
