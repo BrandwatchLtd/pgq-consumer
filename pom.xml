@@ -7,6 +7,16 @@
   <name>PGQ Consumer</name>
   <description>Consumes events from PGQ.</description>
 
+  <scm>
+    <connection>scm:git:git@github.com:BrandwatchLtd/pgq-consumer.git</connection>
+    <developerConnection>scm:git:git@github.com:BrandwatchLtd/pgq-consumer.git</developerConnection>
+  </scm>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>com.google.guava</groupId>
@@ -24,9 +34,9 @@
       <version>4.0.6.RELEASE</version>
     </dependency>
     <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>1.1.2</version>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.7</version>
     </dependency>
   </dependencies>
 </project>
