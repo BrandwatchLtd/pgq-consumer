@@ -1,4 +1,4 @@
-pgq-consumer
+pgq-consumer [![Build Status](https://travis-ci.org/BrandwatchLtd/pgq-consumer.svg)](https://travis-ci.org/BrandwatchLtd/pgq-consumer)
 ============
 
 A PGQ consumer written in Java, using Spring's ```JdbcTemplate``` for database access.
