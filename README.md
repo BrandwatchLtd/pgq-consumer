@@ -1,7 +1,7 @@
 pgq-consumer
 ============
 
-A PGQ consumer written in Java, using Spring.
+A PGQ consumer written in Java, using Spring's ```JdbcTemplate``` for database access.
 
 What's PGQ?
 -----------
