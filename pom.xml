@@ -24,6 +24,15 @@
     </license>
   </licenses>
 
+  <developers>
+    <developer>
+      <name>James Stanier</name>
+      <email>jamess@brandwatch.com</email>
+      <organization>Brandwatch</organization>
+      <organizationUrl>http://www.brandwatch.com</organizationUrl>
+    </developer>
+  </developers>
+
   <dependencies>
     <dependency>
       <groupId>com.google.guava</groupId>
