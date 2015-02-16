@@ -44,18 +44,7 @@ public class PGQConsumer implements Runnable {
         while (!Thread.currentThread().isInterrupted()) {
             Long batchId = getNextBatchId();
             if (batchId != null) {
-                List<PGQEvent> events = getNextBatch(batchId);
-                for (PGQEvent event : events) {
-                    if (Thread.currentThread().isInterrupted()) {
-                        break;
-                    }
-                    try {
-                        eventHandler.handle(event);
-                    } catch (Throwable t) {
-                        log.error("Got exception processing event", t);
-                        retryEvent(batchId, event.getId(), EVENT_RETRY_SECONDS);
-                    }
-                }
+                processEvents(batchId, getNextBatch(batchId));
                 finishBatch(batchId);
             } else if (!Thread.currentThread().isInterrupted()) {
                 try {
@@ -66,6 +55,20 @@ public class PGQConsumer implements Runnable {
                     Thread.currentThread().interrupt();
                     break;
                 }
+            }
+        }
+    }
+
+    private void processEvents(Long batchId, List<PGQEvent> events) {
+        for (PGQEvent event : events) {
+            if (Thread.currentThread().isInterrupted()) {
+                break;
+            }
+            try {
+                eventHandler.handle(event);
+            } catch (Throwable t) {
+                log.error("Got exception processing event", t);
+                retryEvent(batchId, event.getId(), EVENT_RETRY_SECONDS);
             }
         }
     }
