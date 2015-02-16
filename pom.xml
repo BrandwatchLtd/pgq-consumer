@@ -1,21 +1,42 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.brandwatch</groupId>
   <artifactId>pgq-consumer</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.3-SNAPSHOT</version>
   <name>PGQ Consumer</name>
   <description>Consumes events from PGQ.</description>
+  
+  <parent>
+    <groupId>org.sonatype.oss</groupId>
+    <artifactId>oss-parent</artifactId>
+    <version>7</version>
+  </parent>
 
   <scm>
     <connection>scm:git:git@github.com:BrandwatchLtd/pgq-consumer.git</connection>
     <developerConnection>scm:git:git@github.com:BrandwatchLtd/pgq-consumer.git</developerConnection>
   </scm>
-
+  
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
+
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>James Stanier</name>
+      <email>jamess@brandwatch.com</email>
+      <organization>Brandwatch</organization>
+      <organizationUrl>http://www.brandwatch.com</organizationUrl>
+    </developer>
+  </developers>
 
   <dependencies>
     <dependency>
@@ -39,4 +60,5 @@
       <version>1.7.7</version>
     </dependency>
   </dependencies>
+  
 </project>
