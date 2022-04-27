@@ -63,7 +63,7 @@ public class PGQConsumer implements Runnable {
         if (backoffMillis >= MIN_BACKOFF_MILLIS && backoffMillis <= MAX_BACKOFF_MILLIS)
             this.backoffMillis = backoffMillis;
         else
-            throw new IllegalArgumentException("Invalid backoffMillis interval [" + backoffMillis + "], must be in range (" + MIN_BACKOFF_MILLIS + " - " + MAX_BACKOFF_MILLIS + ").");
+            throw new IllegalArgumentException("Invalid polling interval [" + backoffMillis + "]ms, must be in range (" + MIN_BACKOFF_MILLIS + "ms - " + MAX_BACKOFF_MILLIS + "ms).");
     }
 
 
