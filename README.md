@@ -27,5 +27,10 @@ DataSource dataSource = ...                           // Initialised and pointin
 PGQEventHandler eventHandler = new MyEventHandler();  // Your callback for each event
 PGQConsumer pgqConsumer = new PGQConsumer(queueName, consumerName, dataSource, eventHandler);
 ```
+A  ```PGQConsumer  ```polls its queue at 100ms intervals by default.  This may be set from 50ms - 4 hours in the constructor, e.g. :
+
+  ```java
+PGQConsumer pgqConsumer = new PGQConsumer(queueName, consumerName, dataSource, eventHandler, 3600000);
+```
 
 The ```PGQConsumer``` is a ```Runnable```, so put it into a pool for continuous execution, and away you go. If you're looking for an example ```PGQEventHandler``` then check out ```PrintingEventHandler```.
