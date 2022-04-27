@@ -19,20 +19,53 @@ public class PGQConsumer implements Runnable {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private static final int REGISTER_SUCCESS = 1;
-    private static final long BACKOFF_MILLIS = 100;
+    private static final long DEFAULT_BACKOFF_MILLIS = 100;
+    private static final long MAX_BACKOFF_MILLIS = 14400000;    //4 hours
+    private static final long MIN_BACKOFF_MILLIS = 50;
     private static final int EVENT_RETRY_SECONDS = 10;
 
     private final String queueName;
     private final String consumerName;
     private final JdbcTemplate jdbcTemplate;
     private final PGQEventHandler eventHandler;
+    private long backoffMillis;
 
+    /**
+     * Creates consumer with the default 100ms polling interval.
+     * @param queueName
+     * @param consumerName
+     * @param dataSource - the datasource to poll, must contain a PGQ schema.
+     * @param eventHandler - the object which does something with fetched events.
+     */
     public PGQConsumer(String queueName, String consumerName, DataSource dataSource, PGQEventHandler eventHandler) {
         this.queueName = queueName;
         this.consumerName = consumerName;
         jdbcTemplate = new JdbcTemplate(dataSource);
         this.eventHandler = eventHandler;
+        this.backoffMillis = DEFAULT_BACKOFF_MILLIS;
     }
+
+    /**
+     * Creates a consumer with an arbitrary polling interval, within a range of MIN_BACKOFF_MILLIS - MAX_BACKOFF_MILLIS.
+     * @param queueName
+     * @param consumerName
+     * @param dataSource - the datasource to poll, must contain a PGQ schema.
+     * @param eventHandler - the object which does something with fetched events.
+     * @param backoffMillis - queue polling interval, in ms.
+     * @throws  IllegalArgumentException when backoffMillis is outside of [MIN_BACKOFF_MILLIS,MAX_BACKOFF_MILLIS].
+     */
+    public PGQConsumer(String queueName, String consumerName, DataSource dataSource, PGQEventHandler eventHandler, long backoffMillis) {
+        this.queueName = queueName;
+        this.consumerName = consumerName;
+        jdbcTemplate = new JdbcTemplate(dataSource);
+        this.eventHandler = eventHandler;
+
+        if (backoffMillis >= MIN_BACKOFF_MILLIS && backoffMillis <= MAX_BACKOFF_MILLIS)
+            this.backoffMillis = backoffMillis;
+        else
+            throw new IllegalArgumentException("Invalid polling interval [" + backoffMillis + "]ms, must be in range (" + MIN_BACKOFF_MILLIS + "ms - " + MAX_BACKOFF_MILLIS + "ms).");
+    }
+
 
     /**
      * Polls PGQ for events and processes them when found.
@@ -40,7 +73,7 @@ public class PGQConsumer implements Runnable {
     public void run() {
         log.info("Starting consumer");
         registerIfNeeded();
-        log.debug("Polling for a batch every {}ms", BACKOFF_MILLIS);
+        log.debug("Polling for a batch every {} ms", this.backoffMillis);
         while (!Thread.currentThread().isInterrupted()) {
             Long batchId = getNextBatchId();
             if (batchId != null) {
@@ -48,7 +81,7 @@ public class PGQConsumer implements Runnable {
                 finishBatch(batchId);
             } else if (!Thread.currentThread().isInterrupted()) {
                 try {
-                    Thread.sleep(BACKOFF_MILLIS);
+                    Thread.sleep(this.backoffMillis);
                 } catch (InterruptedException e) {
                     log.error("Interrupted", e);
                     // This seems counter intuitive but Thread.isInterrupted() goes back to false when InterruptedException is thrown.
